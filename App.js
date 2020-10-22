@@ -1,9 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { AppLoading } from 'expo';
+import thunk from 'redux-thunk';
+import rootReducer from './src/store/reducers/index';
 import { useFonts } from '@use-expo/font';
 import { StyleSheet } from 'react-native';
 import Main from './src/main';
+
+let composeEnhancers = compose;
+
+if (process.env.NODE_ENV === 'development') {
+    composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+}
+
+const store = createStore(
+    rootReducer,
+    composeEnhancers(applyMiddleware(thunk))
+);
+
 function App() {
     let [fontsLoaded] = useFonts({
         'nunito-regular': require('./assets/fonts/Nunito-Regular.ttf'),

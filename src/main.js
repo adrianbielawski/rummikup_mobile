@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet, Text, View } from 'react-native';
 
 const Main = (props) => {
@@ -9,6 +10,10 @@ const Main = (props) => {
     );
 }
 
+const mapStateToProps = (state) => {
+    return {
+    }
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -16,4 +21,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default connect(mapStateToProps)(Main);
