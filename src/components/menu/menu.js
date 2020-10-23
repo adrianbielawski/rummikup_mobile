@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 //Custom components
-import TimeLimit from './time_limit/timeLimit'
+import AddPlayer from './add_player/addPlayer';
 //Redux actions
 
 const Menu = (props) => {
@@ -10,20 +10,14 @@ const Menu = (props) => {
     return (
         <View style={styles.menu}>
             <TimeLimit></TimeLimit>
+            <AddPlayer ></AddPlayer>
         </View>
     );
 }
 
-const styles = StyleSheet.create({
-    menu: {
-        flex: 1,
-        paddingTop: 24,
-        paddingHorizontal: 10,
-    },
-});
-
 const mapStateToProps = (state) => {
     return {
+        players: state.app.players,
     }
 }
 
@@ -33,3 +27,12 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+
+const styles = StyleSheet.create({
+    menu: {
+        flex: 1,
+        alignItems: 'center',
+        paddingTop: 24,
+        paddingHorizontal: 10,
+    },
+});
