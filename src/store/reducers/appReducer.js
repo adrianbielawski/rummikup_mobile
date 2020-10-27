@@ -4,6 +4,7 @@ import { PLAYERS_COLORS } from '../../constants/constants';
 const initialState = {
     players: [],
     timeLimit: 60,
+    gameCreated: false,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -32,6 +33,10 @@ const appReducer = (state = initialState, action) => {
         case 'PLAYER_COLOR_CHANGED':
             newState.players[action.index].color = action.color;
             return newState;
+
+        case 'GAME_CREATED':
+            newState.gameCreated = true
+            return newState
 
             return newState;
 

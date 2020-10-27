@@ -24,3 +24,8 @@ export const changePlayerColor = (index, color) => ({
     index,
     color,
 });
+
+export const createGame = () => ({
+    type: 'GAME_CREATED',
+})
+
