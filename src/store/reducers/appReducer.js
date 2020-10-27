@@ -5,7 +5,9 @@ const initialState = {
     players: [],
     timeLimit: 60,
     currentPlayer: 0,
+    roundCount: 1,
     gameCreated: true,
+    gameStarted: false,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -38,6 +40,10 @@ const appReducer = (state = initialState, action) => {
         case 'GAME_CREATED':
             newState.gameCreated = true
             return newState
+
+        case 'GAME_STARTED':
+            newState.gameStarted = true;
+            return newState;
 
             return newState;
 

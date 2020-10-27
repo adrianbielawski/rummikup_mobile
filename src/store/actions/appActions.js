@@ -29,3 +29,7 @@ export const createGame = () => ({
     type: 'GAME_CREATED',
 })
 
+export const startGame = () => ({
+    type: 'GAME_STARTED',
+});
+

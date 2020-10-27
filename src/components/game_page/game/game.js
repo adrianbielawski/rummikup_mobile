@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View, Text } from 'react-native';
 //Custom components
+import StartRoundModal from './start_round_modal/startRoundModal';
 //Redux
 
 const Game = (props) => {
@@ -15,6 +16,7 @@ const Game = (props) => {
                 style={playerNameStyle}>
                 {currentPlayer.playerName}
             </Text>
+            <StartRoundModal visible={!props.gameStarted} /> 
         </View>
     );
 };
@@ -23,6 +25,7 @@ const mapStateToProps = (state) => {
     return {
         players: state.app.players,
         currentPlayer: state.app.currentPlayer,
+        gameStarted: state.app.gameStarted,
     }
 }
 
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10,
-        paddingTop: 30,
+        marginTop: 30,
     },
     playerName: {
         fontSize: 50,
