@@ -42,3 +42,8 @@ export const timerUpdated = (timeEnd) => ({
     type: 'TIMER_UPDATED',
     timeEnd,
 });
+
+export const switchPlayer = () => ({
+    type: 'PLAYER_SWITCHED',
+});
+

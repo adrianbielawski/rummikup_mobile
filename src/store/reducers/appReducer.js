@@ -50,6 +50,17 @@ const appReducer = (state = initialState, action) => {
             newState.gameStarted = true;
             return newState;
 
+        case 'PLAYER_SWITCHED':
+            let nextPlayer = newState.currentPlayer + 1;
+
+            if (nextPlayer === newState.players.length) {
+                nextPlayer = 0;
+            }
+
+            newState.currentPlayer = nextPlayer;
+            newState.timeEnd = moment().add(newState.timeLimit, 'seconds');
+            return newState;
+
         case 'TIME_END_UPDATED':
             newState.timeEnd = action.timeEnd;
             return newState;
