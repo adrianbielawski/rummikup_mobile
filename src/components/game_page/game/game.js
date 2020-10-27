@@ -5,8 +5,9 @@ import { StyleSheet, View, Text } from 'react-native';
 //Custom components
 import StartRoundModal from './start_round_modal/startRoundModal';
 import Timer from './timer/timer';
+import Button from '../../global_components/button/button';
 //Redux
-import { switchPlayer } from '../../../store/actions/appActions';
+import { switchPlayer, finishRound } from '../../../store/actions/appActions';
 
 const Game = (props) => {
     const [pressTimeStamp, setPressTimeStamp] = useState(null);
@@ -39,6 +40,9 @@ const Game = (props) => {
                 style={playerNameStyle}>
                 {currentPlayer.playerName}
             </Text>
+            <Button style={styles.finishButton} onPress={props.finishRound}>
+                Finish round
+            </Button>
             <StartRoundModal visible={!props.gameStarted} />
         </View>
     );
@@ -55,6 +59,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         switchPlayer: () => dispatch(switchPlayer()),
+        finishRound: () => dispatch(finishRound()),
     }
 }
 
@@ -66,11 +71,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10,
-        marginTop: 30,
+        marginTop: 25,
     },
     playerName: {
         fontSize: 50,
         textAlign: 'center',
         fontFamily: 'nunito-extraBold',
-    }
+    },
+    finishButton: {
+        borderWidth: 2,
+        borderColor: '#fff',
+    },
 });

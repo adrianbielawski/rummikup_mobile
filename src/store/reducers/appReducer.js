@@ -11,6 +11,7 @@ const initialState = {
     roundCount: 1,
     gameCreated: true,
     gameStarted: false,
+    roundFinished: false,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -69,6 +70,10 @@ const appReducer = (state = initialState, action) => {
             let timeLeft = moment(newState.timeEnd).diff(moment(), 'seconds', true);
             timeLeft = Math.ceil(Math.max(0, timeLeft));
             newState.timeLeft = timeLeft;
+            return newState;
+
+        case 'ROUND_FINISHED':
+            newState.roundFinished = true;
             return newState;
 
         default:
