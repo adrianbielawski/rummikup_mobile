@@ -4,9 +4,24 @@ import cn from 'react-native-classnames';
 import { COLORS } from '../../../constants/constants';
 
 const Button = (props) => {
-    const buttonStyles = cn(styles, 'button', { round: props.round });
+    const buttonStyles = cn(
+        styles,
+        'button',
+        {
+            round: props.round,
+            disabled: props.disabled
+        }
+    );
+
+    const handlePress = () => {
+        if(props.disabled) {
+            return;
+        }
+        props.onPress();
+    }
+
     return (
-        <TouchableOpacity onPress={props.onPress}>
+        <TouchableOpacity onPress={handlePress}>
             <View style={[buttonStyles, props.style]}>
                 <Text style={[styles.buttonText, props.textStyle]}>{props.children}</Text>
             </View>
@@ -35,6 +50,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 35,
         paddingHorizontal: 0,
+    },
+    disabled: {
+        opacity: .3,
     }
 });
 
