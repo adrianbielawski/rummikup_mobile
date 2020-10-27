@@ -1,11 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+//Custom components
 import Menu from './components/menu/menu'
+import GamePage from './components/game_page/gamePage';
 
 const Main = (props) => {
     const getContent = () => {
+        if (props.gameCreated) {
+            return <GamePage />
+        } else {
             return <Menu />
+        }
     }
 
     return (
@@ -17,6 +23,7 @@ const Main = (props) => {
 
 const mapStateToProps = (state) => {
     return {
+        gameCreated: state.app.gameCreated,
     }
 }
 
