@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 //Custom components
 import TimeLimit from './time_limit/timeLimit';
 import AddPlayer from './add_player/addPlayer';
+import Players from './players/players';
 //Redux actions
 
 const Menu = (props) => {
@@ -12,6 +13,7 @@ const Menu = (props) => {
         <View style={styles.menu}>
             <TimeLimit></TimeLimit>
             <AddPlayer ></AddPlayer>
+            <Players></Players>
         </View>
     );
 }

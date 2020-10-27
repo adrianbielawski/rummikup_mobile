@@ -21,9 +21,18 @@ const appReducer = (state = initialState, action) => {
             newState.players = newPlayers;
             return newState;
 
+        case 'PLAYER_REMOVED':
+        case 'PLAYERS_REORDERED':
+            newState.players = action.newPlayers;
+            return newState;
 
         case 'TIME_LIMIT_UPDATED':
             newState.timeLimit = action.timeLimit;
+
+        case 'PLAYER_COLOR_CHANGED':
+            newState.players[action.index].color = action.color;
+            return newState;
+
             return newState;
 
 
