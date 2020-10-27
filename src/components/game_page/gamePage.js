@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 //Custom components
 import Game from './game/game';
+import SubtractPoints from './subtract_points/subtractPoints';
 
 const GamePage = (props) => {
     const getContent = () => {
-        if (props.gameCreated) {
-          return <Game />
+        if (props.roundFinished) {
+            return <SubtractPoints />
+        } else if (props.gameCreated) {
+            return <Game />
         }
     }
 
@@ -21,6 +24,7 @@ const GamePage = (props) => {
 const mapStateToProps = (state) => {
     return {
         gameCreated: state.app.gameCreated,
+        roundFinished: state.app.roundFinished,
     }
 }
 

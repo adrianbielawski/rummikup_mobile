@@ -51,3 +51,30 @@ export const switchPlayer = () => ({
     type: 'PLAYER_SWITCHED',
 });
 
+const subPoints = (players, points) => {
+    let subPlayers = cloneDeep(players);
+    let pointsSum = 0;
+    let winner;
+
+    for (let i = 0; i < subPlayers.length; i++) {
+        const p = parseInt(points[i]) || 0
+        subPlayers[i].score -= p;
+        pointsSum += p;
+        if (p === 0) {
+            winner = i;
+        }
+    };
+
+    subPlayers[winner].score += pointsSum;
+    return subPlayers;
+};
+
+export const handleNextRound = (players, points) => dispatch => {
+    const subPlayers = subPoints(players, points);
+    dispatch(nextRound(subPlayers));
+}
+
+const nextRound = (subPlayers) => ({
+    type: 'NEXT_ROUND',
+    subPlayers,
+});

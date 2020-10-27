@@ -76,6 +76,19 @@ const appReducer = (state = initialState, action) => {
             newState.roundFinished = true;
             return newState;
 
+        case 'NEXT_ROUND':
+            newState.players = action.subPlayers;
+            let currentPlayer = newState.roundCount;
+            if (newState.roundCount >= newState.players.length) {
+                currentPlayer = newState.roundCount % newState.players.length;
+            }
+            newState.currentPlayer = currentPlayer;
+            newState.timeLeft = newState.timeLimit;
+            newState.gameStarted = false;
+            newState.roundFinished = false;
+            newState.roundCount += 1;
+            return newState
+
         default:
             return state;
     }
