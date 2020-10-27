@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 //Custom components
+import TimeLimit from './time_limit/timeLimit';
 import AddPlayer from './add_player/addPlayer';
 //Redux actions
 

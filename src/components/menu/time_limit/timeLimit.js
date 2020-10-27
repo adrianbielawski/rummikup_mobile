@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import cn from 'react-native-classnames';
 //Custom components
-import NumbersPicker from '../../global_components/numbers_picker/numbersPicker';
-import { colors } from '../../../constants/constants';
+import TimePicker from './timePicker'
+import { COLORS } from '../../../constants/constants';
 //Redux actions
-import { updateTimeLimit } from '../../../store/actions/appActions';
 
 const Menu = (props) => {
     const [showTimePicker, setShowTimePicker] = useState(false);
@@ -30,12 +29,7 @@ const Menu = (props) => {
     const handleTimerPress = () => {
         setShowTimePicker(true);
     }
-    const handleTimeChange = (values) => {
-        props.updateTimeLimit(values[0] * 60 + values[1]);
-        setShowTimePicker(false);
-    }
-
-    const handleCancelPicker = () => {
+    const closeTimePicker = () => {
         setShowTimePicker(false);
     }
 
@@ -49,22 +43,7 @@ const Menu = (props) => {
                 <Text style={colonStyles}>:</Text>
                 <Text style={styles.text}>{getSeconds()}</Text>
             </TouchableOpacity>
-            {showTimePicker &&
-                <NumbersPicker
-                    pickers={
-                        [
-                            { from: 0, to: 10, initial: Math.floor(props.timeLimit / 60) },
-                            { from: 0, to: 59, initial: props.timeLimit % 60 },
-                        ]
-                    }
-                    style={styles.timePicker}
-                    themeColor={colors.themeColor}
-                    buttonsStyles={styles.timePickerButtons}
-                    size={60}
-                    onConfirm={handleTimeChange}
-                    onCancel={handleCancelPicker}
-                ></NumbersPicker>
-            }
+            <TimePicker show={showTimePicker} onClose={closeTimePicker} />
         </View>
     );
 }
@@ -75,13 +54,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        updateTimeLimit: (timeLimit) => dispatch(updateTimeLimit(timeLimit)),
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Menu);
+export default connect(mapStateToProps)(Menu);
 
 const styles = StyleSheet.create({
     menu: {
@@ -105,15 +78,9 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 50,
         fontFamily: 'nunito-extraBold',
-        color: colors.themeColor,
+        color: COLORS.themeColor,
     },
     colon: {
         top: -5,
-    },
-    timePicker: {
-        top: 30,
-    },
-    timePickerButtons: {
-        marginVertical: 5,
     },
 });
