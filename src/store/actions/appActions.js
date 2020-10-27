@@ -33,3 +33,12 @@ export const startGame = () => ({
     type: 'GAME_STARTED',
 });
 
+export const updateTimeEnd = (timeEnd) => ({
+    type: 'TIME_END_UPDATED',
+    timeEnd,
+});
+
+export const timerUpdated = (timeEnd) => ({
+    type: 'TIMER_UPDATED',
+    timeEnd,
+});

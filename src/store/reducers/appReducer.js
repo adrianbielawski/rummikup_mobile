@@ -1,9 +1,12 @@
 import { cloneDeep } from 'lodash';
+import moment from 'moment';
 import { PLAYERS_COLORS } from '../../constants/constants';
 
 const initialState = {
     players: [],
     timeLimit: 60,
+    timeLeft: 60,
+    timeEnd: 0,
     currentPlayer: 0,
     roundCount: 1,
     gameCreated: true,
@@ -32,6 +35,8 @@ const appReducer = (state = initialState, action) => {
 
         case 'TIME_LIMIT_UPDATED':
             newState.timeLimit = action.timeLimit;
+            newState.timeLeft = action.timeLimit;
+            return newState;
 
         case 'PLAYER_COLOR_CHANGED':
             newState.players[action.index].color = action.color;
@@ -45,8 +50,15 @@ const appReducer = (state = initialState, action) => {
             newState.gameStarted = true;
             return newState;
 
+        case 'TIME_END_UPDATED':
+            newState.timeEnd = action.timeEnd;
             return newState;
 
+        case 'TIMER_UPDATED':
+            let timeLeft = moment(newState.timeEnd).diff(moment(), 'seconds', true);
+            timeLeft = Math.ceil(Math.max(0, timeLeft));
+            newState.timeLeft = timeLeft;
+            return newState;
 
         default:
             return state;
