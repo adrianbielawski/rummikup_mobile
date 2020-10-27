@@ -4,7 +4,8 @@ import { PLAYERS_COLORS } from '../../constants/constants';
 const initialState = {
     players: [],
     timeLimit: 60,
-    gameCreated: false,
+    currentPlayer: 0,
+    gameCreated: true,
 };
 
 const appReducer = (state = initialState, action) => {

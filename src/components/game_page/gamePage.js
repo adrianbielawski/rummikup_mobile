@@ -2,10 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, View } from 'react-native';
 //Custom components
+import Game from './game/game';
 
-const GamePage = () => {
+const GamePage = (props) => {
+    const getContent = () => {
+        if (props.gameCreated) {
+          return <Game />
+        }
+    }
+
     return (
         <View style={styles.gamePage}>
+            {getContent()}
         </View>
     )
 }
