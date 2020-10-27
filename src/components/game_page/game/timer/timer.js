@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import 'moment-duration-format';
 //Redux Actions
 import { timerUpdated, updateTimeEnd } from '../../../../store/actions/appActions';
 
