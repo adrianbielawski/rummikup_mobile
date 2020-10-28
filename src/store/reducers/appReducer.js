@@ -12,6 +12,7 @@ const initialState = {
     gameCreated: true,
     gameStarted: false,
     roundFinished: false,
+    gameFinished: false,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -89,6 +90,10 @@ const appReducer = (state = initialState, action) => {
             newState.roundCount += 1;
             return newState
 
+        case 'GAME_FINISHED':
+            newState.players = action.subPlayers;
+            newState.gameFinished = true;
+            return newState;
         default:
             return state;
     }

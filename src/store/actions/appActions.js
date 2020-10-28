@@ -1,3 +1,4 @@
+import { cloneDeep } from 'lodash';
 
 export const addPlayer = (playerName) => ({
     type: 'PLAYER_ADDED',
@@ -78,3 +79,14 @@ const nextRound = (subPlayers) => ({
     type: 'NEXT_ROUND',
     subPlayers,
 });
+
+export const handleFinishGame = (players, points) => dispatch => {
+    const subPlayers = subPoints(players, points);
+    dispatch(finishGame(subPlayers));
+}
+
+const finishGame = (subPlayers) => ({
+    type: 'GAME_FINISHED',
+    subPlayers,
+});
+
