@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { StyleSheet, View, Text } from 'react-native';
@@ -10,8 +10,20 @@ import Button from '../../global_components/button/button';
 import { switchPlayer, finishRound } from '../../../store/actions/appActions';
 
 const Game = (props) => {
+    const pressInterval = useRef(null);
     const [pressTimeStamp, setPressTimeStamp] = useState(null);
     const currentPlayer = props.players[props.currentPlayer];
+
+    useEffect(() => {
+        if (pressTimeStamp !== null) {
+            pressInterval.current = setTimeout(() => setPressTimeStamp(null), 300)
+        }
+        return () => {
+            if (pressInterval.current) {
+                clearTimeout(pressInterval.current)
+            }
+        }
+    }, [pressTimeStamp])
 
     const handlePress = () => {
         if (pressTimeStamp !== null) {
@@ -22,7 +34,6 @@ const Game = (props) => {
             }
         } else {
             setPressTimeStamp(moment());
-            setTimeout(() => setPressTimeStamp(null), 300)
         }
     }
 
