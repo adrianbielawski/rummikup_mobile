@@ -90,3 +90,6 @@ const finishGame = (subPlayers) => ({
     subPlayers,
 });
 
+export const exitGame = () => ({
+    type: 'GAME_CLOSED',
+});

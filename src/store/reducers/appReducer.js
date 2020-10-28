@@ -94,6 +94,17 @@ const appReducer = (state = initialState, action) => {
             newState.players = action.subPlayers;
             newState.gameFinished = true;
             return newState;
+
+        case 'GAME_CLOSED':
+            let players = cloneDeep(newState.players);
+            players = players.map(player => {
+                player.score = 0;
+                return player;
+            })
+            newState = cloneDeep(initialState);
+            newState.players = players;
+            return newState;
+
         default:
             return state;
     }

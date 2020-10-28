@@ -4,10 +4,13 @@ import { StyleSheet, View } from 'react-native';
 //Custom components
 import Game from './game/game';
 import SubtractPoints from './subtract_points/subtractPoints';
+import GameSummary from './game_summary/gameSummary';
 
 const GamePage = (props) => {
     const getContent = () => {
-        if (props.roundFinished) {
+        if (props.gameFinished) {
+            return <GameSummary />
+        } else if (props.roundFinished) {
             return <SubtractPoints />
         } else if (props.gameCreated) {
             return <Game />
@@ -25,6 +28,7 @@ const mapStateToProps = (state) => {
     return {
         gameCreated: state.app.gameCreated,
         roundFinished: state.app.roundFinished,
+        gameFinished: state.app.gameFinished,
     }
 }
 
