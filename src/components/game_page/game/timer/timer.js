@@ -3,11 +3,40 @@ import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import 'moment-duration-format';
+import { Audio } from 'expo-av';
 //Redux Actions
 import { timerUpdated, updateTimeEnd } from '../../../../store/actions/appActions';
 
+const BEEP = require('../../../../../assets/audio/beep.mp3');
+const LONG_BEEP = require('../../../../../assets/audio/long-beep.mp3');
+
 const Timer = (props) => {
     const timerInterval = useRef(null);
+    const beep = new Audio.Sound();
+
+    const playSound = async (sound) => {
+        try {
+            await beep.loadAsync(sound);
+            await beep.playAsync();
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    useEffect(() => {
+        const timeLeft = props.timeLeft;
+        const timeLimit = props.timeLimit;
+        if ((timeLeft % 30 === 0 && timeLeft !== timeLimit || timeLeft <= 10) && timeLeft !== 0) {
+            playSound(BEEP);
+        }
+
+        if (timeLeft !== null && timeLeft <= 0) {
+            playSound(LONG_BEEP);
+            if (timerInterval.current) {
+                clearInterval(timerInterval.current);
+            }
+        }
+    }, [props.timeLeft])
 
     useEffect(() => {
         props.updateTimeEnd(getTimeEnd());
@@ -18,7 +47,7 @@ const Timer = (props) => {
         timerInterval.current = setInterval(props.timerUpdated, 1000);
         return () => {
             if (timerInterval.current) {
-                clearInterval(timerInterval.current)
+                clearInterval(timerInterval.current);
             }
         }
     }, [props.timeEnd.valueOf(), props.roundCount])
