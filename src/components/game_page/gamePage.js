@@ -9,11 +9,11 @@ import GameSummary from './game_summary/gameSummary';
 const GamePage = (props) => {
     const getContent = () => {
         if (props.gameFinished) {
-            return <GameSummary />
+            return <GameSummary />;
         } else if (props.roundFinished) {
-            return <SubtractPoints />
+            return <SubtractPoints />;
         } else if (props.gameCreated) {
-            return <Game />
+            return <Game />;
         }
     }
 
@@ -29,7 +29,7 @@ const mapStateToProps = (state) => {
         gameCreated: state.app.gameCreated,
         roundFinished: state.app.roundFinished,
         gameFinished: state.app.gameFinished,
-    }
+    };
 }
 
 export default connect(mapStateToProps)(GamePage);

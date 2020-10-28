@@ -9,7 +9,7 @@ const initialState = {
     timeEnd: 0,
     currentPlayer: 0,
     roundCount: 1,
-    gameCreated: true,
+    gameCreated: false,
     gameStarted: false,
     roundFinished: false,
     gameFinished: false,
@@ -23,7 +23,7 @@ const appReducer = (state = initialState, action) => {
             const id = newPlayers.length
             newPlayers.push({
                 playerName: action.playerName,
-                id,
+                id: action.playerName,
                 color: Object.entries(PLAYERS_COLORS)[id],
                 score: 0,
             });

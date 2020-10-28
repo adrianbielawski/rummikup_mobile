@@ -8,7 +8,7 @@ import PlayerSubPoints from './player_subtract_points/playerSubtractPoints';
 import { handleNextRound, handleFinishGame } from '../../../store/actions/appActions';
 
 const SubtractPoints = (props) => {
-    const [points, setPoints] = useState({})
+    const [points, setPoints] = useState({});
 
     const handleNextRound = () => {
         props.handleNextRound(props.players, points);

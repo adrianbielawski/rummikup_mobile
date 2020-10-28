@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         paddingTop: 24,
-        paddingHorizontal: 10,
+        paddingHorizontal: 5,
     },
 });

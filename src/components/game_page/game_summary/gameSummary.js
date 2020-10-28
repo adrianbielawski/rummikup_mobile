@@ -22,7 +22,7 @@ const GameSummary = (props) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         exitGame: () => dispatch(exitGame()),
-    }
+    };
 }
 
 export default connect(null, mapDispatchToProps)(GameSummary);

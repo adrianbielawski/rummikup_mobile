@@ -16,11 +16,11 @@ const Game = (props) => {
 
     useEffect(() => {
         if (pressTimeStamp !== null) {
-            pressInterval.current = setTimeout(() => setPressTimeStamp(null), 300)
+            pressInterval.current = setTimeout(() => setPressTimeStamp(null), 300);
         }
         return () => {
             if (pressInterval.current) {
-                clearTimeout(pressInterval.current)
+                clearTimeout(pressInterval.current);
             }
         }
     }, [pressTimeStamp])
@@ -64,14 +64,14 @@ const mapStateToProps = (state) => {
         players: state.app.players,
         currentPlayer: state.app.currentPlayer,
         gameStarted: state.app.gameStarted,
-    }
+    };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         switchPlayer: () => dispatch(switchPlayer()),
         finishRound: () => dispatch(finishRound()),
-    }
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

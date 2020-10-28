@@ -31,7 +31,7 @@ const PlayersSummary = (props) => {
             previousPlace = place;
 
             return <PlayerSummary player={player} placeText={placeText} place={place} key={index} />;
-        })
+        });
         return playersSummary;
     }
 
@@ -39,13 +39,13 @@ const PlayersSummary = (props) => {
         <ScrollView style={styles.results} showsVerticalScrollIndicator={false}>
             {getPlayersSummary()}
         </ScrollView>
-    )
+    );
 }
 
 const mapStateToProps = (state) => {
     return {
         players: state.app.players,
-    }
+    };
 }
 
 export default connect(mapStateToProps)(PlayersSummary);
